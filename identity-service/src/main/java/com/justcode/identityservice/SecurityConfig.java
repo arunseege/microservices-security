@@ -2,6 +2,7 @@ package com.justcode.identityservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -14,16 +15,17 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder encoder){
         UserDetails admin = User.withUsername("arun")
                 .password(encoder.encode("arun"))
-                .roles("admin").build();
+                .roles("ADMIN").build();
         UserDetails user = User.withUsername("varun")
                 .password(encoder.encode("varun"))
-                .roles("user").build();
+                .roles("USER").build(); //role  should be in uppercase otherwise error
         return new InMemoryUserDetailsManager(admin,user);
     }
 

@@ -3,6 +3,7 @@ package com.justcode.identityservice.controller;
 import com.justcode.identityservice.dto.Product;
 import com.justcode.identityservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,13 +21,13 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-   // @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+   @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<Product> getAllProducts(){
         return productService.getProducts();
     }
 
     @GetMapping("/{id}")
-  //  @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public Product getProductById(@PathVariable int id){
         return productService.getProduct(id);
     }
