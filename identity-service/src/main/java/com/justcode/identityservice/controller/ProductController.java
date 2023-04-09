@@ -1,6 +1,7 @@
 package com.justcode.identityservice.controller;
 
 import com.justcode.identityservice.dto.Product;
+import com.justcode.identityservice.entity.UserInfo;
 import com.justcode.identityservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -14,6 +15,7 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
 
     @GetMapping("/welcome")
     public String welcome(){
@@ -32,9 +34,9 @@ public class ProductController {
         return productService.getProduct(id);
     }
 
- /*   @PostMapping("/new")
+    @PostMapping("/new")
     public String addNewUser(@RequestBody UserInfo userInfo){
         return productService.addUser(userInfo);
-    }*/
+    }
 
 }

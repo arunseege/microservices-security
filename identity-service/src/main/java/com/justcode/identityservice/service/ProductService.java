@@ -2,8 +2,11 @@ package com.justcode.identityservice.service;
 
 
 import com.justcode.identityservice.dto.Product;
+import com.justcode.identityservice.entity.UserInfo;
+import com.justcode.identityservice.repository.UserInfoRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -17,11 +20,11 @@ public class ProductService {
 
     List<Product> productList = null;
 
- /*   @Autowired
-    private UserInfoRepository repository;*/
+    @Autowired
+    private UserInfoRepository repository;
 
-/*    @Autowired
-    private PasswordEncoder passwordEncoder;*/
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void loadProductsFromDB() {
@@ -47,12 +50,12 @@ public class ProductService {
     }
 
 
-   /* public String addUser(UserInfo userInfo) {
-        //userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
-        userInfo.setPassword(userInfo.getPassword());
+    public String addUser(UserInfo userInfo) {
+        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+       // userInfo.setPassword(userInfo.getPassword());
         repository.save(userInfo);
         return "user added to system ";
-    }*/
+    }
 
 
 }
